@@ -23,4 +23,11 @@ export class FlightService {
             }
         })
     }
+
+    static async getFlightById(id: number){
+        return await client.request<FlightModel>({
+            url: `/flight/${id}`,
+            method: 'get'
+        })
+    }
 }

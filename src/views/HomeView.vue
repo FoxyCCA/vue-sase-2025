@@ -30,7 +30,7 @@ FlightService.getFlights()
                 </li>
             </ul>
             <div class="card-body">
-                <RouterLink :to="`/flight/${f.id}`" class="btn btn-sm btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit</RouterLink>
+                <RouterLink :to="`/flight/${f.id}`" class="btn btn-sm btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Details</RouterLink>
             </div>
         </div>
     </div>
