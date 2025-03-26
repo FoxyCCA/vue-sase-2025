@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FlightModel } from '@/models/flight.model';
 import { FlightService } from '@/services/flight.service';
+import { formatTime } from '@/utils';
 import { ref } from 'vue';
 
 const flights = ref<FlightModel[]>()
@@ -11,19 +12,25 @@ FlightService.getFlights()
 <template>
     <div class="wrapper mb-3 mt-3">
         <div class="card" style="width: 18rem;" v-for="f of flights" :key="f.id">
-            <img :src="`https://img.pequla.com/destination/${f.destination.toLowerCase().split(' ')[0]}.jpg`" class="card-img-top" :alt="f.destination">
+            <img :src="`https://img.pequla.com/destination/${f.destination.toLowerCase().split(' ')[0]}.jpg`"
+                class="card-img-top" :alt="f.destination">
             <div class="card-body">
                 <h5 class="card-title">{{ f.destination }}</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ f.flightNumber }}</h6>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i> {{ formatTime(f.estimatedAt ?? f.scheduledAt) }}
+                </li>
+                <li class="list-group-item">
+                    <i class="fa-solid fa-plane"></i> {{ f.plane }}
+                </li>
+                <li class="list-group-item">
+                    <i class="fa-solid fa-circle-info"></i> {{ f.gate ? `G: ${f.gate} / T: ${f.terminal}` : `Terminal: ${f.terminal}` }}
+                </li>
             </ul>
             <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <RouterLink :to="`/flight/${f.id}`" class="btn btn-sm btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit</RouterLink>
             </div>
         </div>
     </div>
