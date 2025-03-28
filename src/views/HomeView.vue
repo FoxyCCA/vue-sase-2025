@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FlightModel } from '@/models/flight.model';
 import { FlightService } from '@/services/flight.service';
-import { formatTime } from '@/utils';
+import { destinationImage, formatTime } from '@/utils';
 import { ref } from 'vue';
 
 const flights = ref<FlightModel[]>()
@@ -10,9 +10,9 @@ FlightService.getFlights()
 </script>
 
 <template>
-    <div class="wrapper mb-3 mt-3" v-if="flights">
+    <div class="wrapper mb-3" v-if="flights">
         <div class="card" style="width: 18rem;" v-for="f of flights" :key="f.id">
-            <img :src="`https://img.pequla.com/destination/${f.destination.toLowerCase().split(' ')[0]}.jpg`"
+            <img :src="destinationImage(f)"
                 class="card-img-top" :alt="f.destination">
             <div class="card-body">
                 <h5 class="card-title">{{ f.destination }}</h5>
@@ -23,10 +23,11 @@ FlightService.getFlights()
                     <i class="fa-solid fa-clock-rotate-left"></i> {{ formatTime(f.estimatedAt ?? f.scheduledAt) }}
                 </li>
                 <li class="list-group-item">
-                    <i class="fa-solid fa-plane"></i> {{ f.plane }}
+                    <i class="fa-solid fa-plane"></i> Plane: {{ f.plane }}
                 </li>
                 <li class="list-group-item">
-                    <i class="fa-solid fa-circle-info"></i> {{ f.gate ? `G: ${f.gate} / T: ${f.terminal}` : `Terminal: ${f.terminal}` }}
+                    <i class="fa-solid fa-circle-info"></i> {{ f.gate ? `Gate: ${f.gate} / Terminal: ${f.terminal}` :
+                        'Terminal: ' + f.terminal }}
                 </li>
             </ul>
             <div class="card-body">

@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
       <div class="container">
         <RouterLink class="navbar-brand" to="/">
           <i class="fa-solid fa-shield-halved"></i> SASE_2025
@@ -22,7 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </li>
             <li class="nav-item">
               <RouterLink class="nav-link" to="/about">
-               <i class="fa-solid fa-circle-info"></i> About
+                <i class="fa-solid fa-circle-info"></i> About
               </RouterLink>
             </li>
           </ul>
