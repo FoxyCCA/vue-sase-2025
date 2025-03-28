@@ -10,7 +10,7 @@ FlightService.getFlights()
 </script>
 
 <template>
-    <div class="wrapper mb-3 mt-3">
+    <div class="wrapper mb-3 mt-3" v-if="flights">
         <div class="card" style="width: 18rem;" v-for="f of flights" :key="f.id">
             <img :src="`https://img.pequla.com/destination/${f.destination.toLowerCase().split(' ')[0]}.jpg`"
                 class="card-img-top" :alt="f.destination">
@@ -30,18 +30,21 @@ FlightService.getFlights()
                 </li>
             </ul>
             <div class="card-body">
-                <RouterLink :to="`/flight/${f.id}`" class="btn btn-sm btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Details</RouterLink>
+                <RouterLink :to="`/flight/${f.id}`" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
+                </RouterLink>
             </div>
         </div>
     </div>
+    <div v-else>Loading data...</div>
 </template>
 
 <style>
 .wrapper {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
     flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
     justify-content: center;
 }
 </style>
