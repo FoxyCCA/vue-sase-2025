@@ -5,11 +5,27 @@ import { destinationImage, formatTime } from '@/utils';
 import { ref } from 'vue';
 
 const flights = ref<FlightModel[]>()
+const allFlights = ref<FlightModel[]>()
+
 FlightService.getFlights()
-    .then(rsp => flights.value = rsp.data)
+    .then(rsp => {
+        allFlights.value = rsp.data
+        flights.value = rsp.data
+    })
 
 function doSearch(e: any){
-    console.log(e.target.value)
+    if (allFlights.value == undefined) return
+
+    const input = e.target.value? e.target.value.toLowerCase() : ''
+    if (input == ''){
+        flights.value == allFlights.value
+    }
+
+    flights.value = allFlights.value.filter(f => {
+        return f.destination.toLowerCase().includes(input)
+            || f.flightNumber.toLowerCase().includes(input)
+            || f.plane.toLowerCase().includes(input)
+    })
 }
 </script>
 

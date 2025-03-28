@@ -32,4 +32,9 @@ import { RouterLink, RouterView } from 'vue-router'
     <RouterView />
   </div>
 </template>
- 
+
+<style>
+#app {
+  display: flex;
+}
+</style>
