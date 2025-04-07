@@ -1,4 +1,3 @@
-eScript
 <script lang="ts" setup>
 import { AuthService } from '@/services/auth.service';
 import { MainService } from '@/services/main.service';
@@ -11,7 +10,9 @@ const router = useRouter()
 
 function doLogin(e: Event) {
     e.preventDefault()
+
     if (email.value == '' || password.value == '') return
+
     MainService.login(email.value, password.value)
         .then(rsp => {
             AuthService.createAuth(rsp.data)

@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import type { FlightModel } from '@/models/flight.model';
+import { AuthService } from '@/services/auth.service';
 import { FlightService } from '@/services/flight.service';
 import { destinationImage, formatTime } from '@/utils';
 import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const flights = ref<FlightModel[]>()
 const allFlights = ref<FlightModel[]>()
 
+const router = useRouter()
 FlightService.getFlights()
     .then(rsp => {
         allFlights.value = rsp.data
         flights.value = rsp.data
+    })
+    .catch(e=> {
+        AuthService.removeAuth()
+        router.push('/login')
     })
 
 function doSearch(e: any){
