@@ -20,6 +20,7 @@ FlightService.getFlights()
 </script>
 
 <template>
+    <h3>Table View</h3>
     <table class="table table-stripped table-hover" v-if="flights">
         <thead>
             <tr>
